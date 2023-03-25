@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  if isAuthenticated
+    span
+      a(href="/logout") Sign out
+  else
+    a(href="/login") Sign in
+  h1 Contact List
+  a(href="/create") Create a new contact
+  table
+    thead
+      tr
+        th Name
+        th Phone
+        th Email
+        th Address
+        th Contact
+    tbody
+      each user in users
+        tr
+          td
+            a(href=`/${user.id}`)= user.firstname + ' ' + user.lastname
+          td= user.phonenumber
+          td= user.email
+          td= user.street + ' ' + user.city + ', ' + user.state  +' ' + user.zip + ' ' + user.country
+          td
+            label
+              input(type="checkbox", name='contactbyphone', disabled, checked=user.contact_phone > 0)
+              | Phone
+            br
+            label
+              input(type="checkbox", name='contactbyemail', disabled, checked=user.contact_email > 0)
+              | Email
+            br
+            label
+              input(type="checkbox", name='contactbymail', disabled, checked=user.contact_mail > 0)
+              | Mail

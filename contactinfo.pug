@@ -1,0 +1,46 @@
+extends layout
+
+block content
+
+  if isAuthenticated
+    a(href="/logout") Sign out
+  else
+    a(href="/login") Sign in
+
+  h1 Contact Info 
+  each user in users 
+    h2= user.firstname + ' ' + user.lastname
+    <hr>
+    <a href="/">Back to list</a>
+    <p><b>Phone number: </b><span> #{user.phonenumber} </span>
+    </p>
+    if user.contact_phone > 0
+      i May be contacted by phone or text
+    else 
+      i May NOT be contacted by phone or text
+    <hr>
+    <p><b>Email address: </b><span> #{user.email} </span>
+    </p>
+    if user.contact_email > 0
+      i May be contacted by email
+    else 
+      i May NOT be contacted by email
+    <hr>
+    <p><b>Address: </b><br>
+      section 
+        <span> #{user.street}
+      section 
+        span #{user.city}, 
+        span #{user.state} 
+        span #{user.zip}
+      section 
+        span #{user.country}
+    </p>
+    if user.contact_mail > 0
+      i May be contacted by mail 
+    else 
+      i May NOT be contacted by mail 
+    <hr>
+    a(href=`/${user.id}/edit`) Edit contact
+    br
+    a(href=`/${user.id}/delete`) Delete contact

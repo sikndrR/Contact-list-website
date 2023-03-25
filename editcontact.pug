@@ -1,0 +1,62 @@
+extends layout
+
+block content
+    body 
+      if isAuthenticated
+        a(href="/logout") Sign out
+      else
+        a(href="/login") Sign in
+      <h1>Create Contact </h1>
+    form(action='/' + users.id + '/edit',method='POST')
+      fieldset
+        legend Basic Information
+        label(for="firstName") First Name:
+        input(type="text", name="firstName", value=users.firstname, required)
+        br
+        label(for="lastName") Last Name:
+        input(type="text", name="lastName", value=users.lastname, required)
+        br
+        label(for="phoneNumber") Phone Number:
+        input(type="tel", name="phoneNumber",  value=users.phonenumber,required)
+        br
+        label(for="email") Email:
+        input(type="email", name="email",  value=users.email , required)
+      fieldset
+        legend Address
+        label(for="street") Street:
+        input(type="text", name="street", value=users.street, required)
+        br
+        label(for="city") City:
+        input(type="text", name="city",  value=users.city, required)
+        br
+        label(for="state") State:
+        input(type="text", name="state",  value=users.state, required)
+        br
+        label(for="zip") Zip:
+        input(type="text", name="zip",  value=users.zip, required)
+        br
+        label(for="country") Country:
+        input(type="text", name="country",  value=users.country, required)
+        br
+      fieldset
+        legend Contact
+        label Contact by Phone:
+        if users.contact_phone > 0
+            input(type='checkbox', name='contactByPhone', checked=true)
+        else
+            input(type='checkbox', name='contactByPhone', checked=false)
+        br
+        label Contact by Email:
+        if users.contact_email > 0
+            input(type='checkbox', name='contactByEmail', checked=true)
+        else
+            input(type='checkbox', name='contactByEmail', checked=false)
+        br
+        label Contact by Mail:
+        if checked=users.contact_mail > 0
+            input(type='checkbox', name='contactByMail', checked=true)
+        else
+            input(type='checkbox', name='contactByMail', checked=false)
+        br
+      button.btn.btn-danger(type='submit') Save
+    a(href=`/${users.id}`)= 'Cancel'

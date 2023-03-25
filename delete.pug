@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  if isAuthenticated
+    a(href="/logout") Sign out
+  else
+    a(href="/login") Sign in
+
+  h1 Delete Contact 
+  h2 #{users.firstname} #{users.lastname}
+  p Are you sure you want to delete this contact?
+  form(action='/' + users.id + '/delete',method='POST')
+    button.btn.btn-danger(type='submit') Yes!
+    a(href=`/${users.id}`)= 'Nevermind'

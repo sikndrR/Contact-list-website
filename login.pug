@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    body 
+        <h1>Sign in </h1>
+        form(action="/login" method="POST") 
+            label(for="username") Username
+            input(type="text", name="username", required)
+            label(for="password") Password 
+            input(type="password", name="password", required)
+            button(type="submit") Sign in
+            <a href="/">Nevermind</a>
+        if (error)
+                p.error= error
+    body 
+        section 
+            p Don't have an account yet?  <a href="/signup">Sign up here!</a>
